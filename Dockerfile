@@ -38,7 +38,7 @@ RUN CGO_ENABLED=1 GOOS=linux go build -o /app/bin/globetrotter github.com/shubhs
 FROM alpine:3.18
 
 # Install necessary packages
-RUN apk add --no-cache ca-certificates tzdata sqlite
+RUN apk add --no-cache ca-certificates tzdata sqlite curl
 
 # Set working directory
 WORKDIR /app
@@ -62,6 +62,10 @@ ENV GIN_MODE=release
 
 # Expose the port
 EXPOSE 8080
+
+# Add healthcheck
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:8080/health || exit 1
 
 # Run the application
 CMD ["/app/globetrotter"] 

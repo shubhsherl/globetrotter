@@ -23,6 +23,9 @@ func InitServices(database *db.Database) {
 
 // SetupRoutes configures the API routes
 func SetupRoutes(r *gin.Engine) {
+	// Health check endpoint
+	r.GET("/health", HealthCheck)
+
 	// API routes
 	api := r.Group("/api")
 	{
@@ -37,6 +40,11 @@ func SetupRoutes(r *gin.Engine) {
 		api.GET("/game/:id/result", GetGameResult)
 		api.GET("/game/:id/summary", GetGameSummary)
 	}
+}
+
+// HealthCheck handles health check requests
+func HealthCheck(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"status": "ok"})
 }
 
 // GetRandomDestination handles requests for a random destination
