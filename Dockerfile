@@ -55,6 +55,9 @@ COPY --from=backend-builder /app/bin/globetrotter /app/globetrotter
 # Copy migrations if needed
 COPY backend/migrations /app/backend/migrations
 
+# Copy data.json file to the container
+COPY backend/data/data.json /app/data/data.json
+
 # Set environment variables
 ENV PORT=8080
 ENV DB_PATH=/app/data/globetrotter.db
