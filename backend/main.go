@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/gin-contrib/cors"
+	// "github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/shubhsherl/globetrotter/backend/api"
 	"github.com/shubhsherl/globetrotter/backend/db"
@@ -30,13 +30,15 @@ func main() {
 	// Set up Gin router
 	r := gin.Default()
 
-	// Configure CORS
-	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000"},
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
-		AllowHeaders:     []string{"Origin", "Content-Type"},
-		AllowCredentials: true,
-	}))
+	// Configure CORS - Commented out since frontend and backend are on the same domain
+	/*
+		r.Use(cors.New(cors.Config{
+			AllowOrigins:     []string{"http://localhost:3000"},
+			AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
+			AllowHeaders:     []string{"Origin", "Content-Type"},
+			AllowCredentials: true,
+		}))
+	*/
 
 	// Setup routes
 	api.SetupRoutes(r)

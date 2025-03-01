@@ -19,15 +19,14 @@ FROM golang:1.21-alpine AS backend-builder
 WORKDIR /app
 
 # Copy go.mod and go.sum
-COPY backend/go.mod backend/go.sum ./
-COPY go.mod go.sum ./
+COPY backend/go.mod ./
+COPY backend/go.sum ./
 
 # Download dependencies
 RUN go mod download
 
 # Copy the backend source code
 COPY backend/ ./backend/
-COPY .air.toml ./
 
 # Build the backend
 RUN cd backend && CGO_ENABLED=1 GOOS=linux go build -o /app/bin/globetrotter
@@ -36,7 +35,7 @@ RUN cd backend && CGO_ENABLED=1 GOOS=linux go build -o /app/bin/globetrotter
 FROM alpine:3.18
 
 # Install necessary packages
-RUN apk add --no-cache ca-certificates tzdata sqlite
+RUN apk add --no-cache ca-certificates tzdata sqlite gcc musl-dev
 
 # Set working directory
 WORKDIR /app
