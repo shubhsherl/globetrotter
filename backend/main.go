@@ -5,7 +5,6 @@ import (
 	"os"
 	"path/filepath"
 
-	// "github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/shubhsherl/globetrotter/backend/api"
 	"github.com/shubhsherl/globetrotter/backend/db"
@@ -47,19 +46,8 @@ func main() {
 	}
 	r := gin.Default()
 
-	// Configure CORS - Commented out since frontend and backend are on the same domain
-	/*
-		r.Use(cors.New(cors.Config{
-			AllowOrigins:     []string{"http://localhost:3000"},
-			AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
-			AllowHeaders:     []string{"Origin", "Content-Type"},
-			AllowCredentials: true,
-		}))
-	*/
-
 	// Setup routes
 	api.SetupRoutes(r)
-	log.Println("API routes configured")
 
 	// Check if we're running in Docker
 	webappPath := "../webapp/build"
@@ -71,7 +59,7 @@ func main() {
 	// Serve static files for production
 	r.Static("/static", filepath.Join(webappPath, "static"))
 	r.StaticFile("/favicon.ico", filepath.Join(webappPath, "favicon.ico"))
-	r.StaticFile("/index.html", filepath.Join(webappPath, "index.html"))
+	r.StaticFile("/", filepath.Join(webappPath, "index.html"))
 
 	// NoRoute should come after explicit static file handlers
 	r.NoRoute(func(c *gin.Context) {

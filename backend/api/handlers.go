@@ -30,7 +30,6 @@ func InitServices(database *db.Database) {
 func SetupRoutes(r *gin.Engine) {
 	// Health check endpoint - register at multiple paths for redundancy
 	r.GET("/health", HealthCheck)
-	r.GET("/", HealthCheck)
 
 	log.Println("Health check endpoints registered at /health and /")
 
