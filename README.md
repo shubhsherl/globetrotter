@@ -2,6 +2,13 @@
 
 The Globetrotter Challenge is an interactive travel guessing game where players are presented with cryptic clues about famous destinations and must guess the correct location. Upon guessing correctly, players unlock fun facts and trivia about the destination!
 
+## Live Demo
+
+The application is deployed and available at:
+**[https://globetrotter.up.railway.app](https://globetrotter.up.railway.app)**
+
+Try it out and test your geography knowledge!
+
 ## Project Structure
 
 This project is organized as a monorepo with two main components:
@@ -53,25 +60,6 @@ For more detailed instructions, see the README files in the respective directori
 - [Backend README](./backend/README.md)
 - [Frontend README](./webapp/README.md)
 
-## Running Tests
-
-### Backend Tests
-
-Run all backend tests:
-```bash
-make backend-test
-```
-
-For more detailed testing options, see the [Backend Tests README](./backend/tests/README.md).
-
-### Frontend Tests
-
-Run all frontend tests:
-```bash
-cd webapp
-npm test
-```
-
 ## How to Play
 
 1. Enter your username to start the game
@@ -79,6 +67,33 @@ npm test
 3. Select your answer from the multiple choices
 4. Get immediate feedback and learn fun facts
 5. Challenge your friends to beat your score!
+
+## Deployment
+
+### Railway Deployment
+
+The application is deployed on [Railway](https://railway.app), a modern cloud platform that makes it easy to deploy web applications.
+
+#### Deployment Configuration
+
+The deployment uses the following configuration:
+
+- **Backend**: Deployed as a Go service with automatic builds from the repository
+- **Frontend**: Built and served as static files from the same service
+- **Database**: SQLite database stored in a persistent volume
+- **Environment Variables**: Configured in the Railway dashboard for secure credential management
+
+#### Deployment URL
+
+The application is accessible at:
+**[https://globetrotter.up.railway.app](https://globetrotter.up.railway.app)**
+
+#### Deployment Benefits
+
+- **Continuous Deployment**: Automatically deploys when changes are pushed to the main branch
+- **Scalability**: Railway handles scaling based on demand
+- **Monitoring**: Built-in logs and metrics for monitoring application health
+- **SSL**: Automatic SSL certificate management for secure connections
 
 ## License
 
@@ -88,4 +103,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - Data sources for destination information
 - React and Go communities for excellent documentation
+- Railway for providing an excellent hosting platform
 - All contributors to this project 

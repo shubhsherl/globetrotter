@@ -1,4 +1,4 @@
-.PHONY: setup build run clean test dev webapp-build webapp-start backend-build backend-run all backend-test
+.PHONY: setup build run clean dev webapp-build webapp-start backend-build backend-run all
 
 # Default target
 all: setup build run
@@ -54,18 +54,6 @@ backend-run:
 backend-clean:
 	@echo "Cleaning backend..."
 	cd backend && make clean
-
-# Run tests for both webapp and backend
-test:
-	@echo "Running webapp tests..."
-	cd webapp && npm test
-	@echo "Running backend tests..."
-	cd backend && make test
-
-# Run backend tests only
-backend-test:
-	@echo "Running backend tests..."
-	cd backend && make test
 
 # Run both in development mode
 dev:
