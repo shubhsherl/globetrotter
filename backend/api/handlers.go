@@ -15,6 +15,7 @@ import (
 	"github.com/shubhsherl/globetrotter/backend/db"
 	"github.com/shubhsherl/globetrotter/backend/models"
 	"github.com/shubhsherl/globetrotter/backend/services"
+	"github.com/shubhsherl/globetrotter/backend/services/images"
 )
 
 // Define service objects at the package level
@@ -247,7 +248,6 @@ func GetGameResult(c *gin.Context) {
 // GetGameSummary handles requests to get a summary of a game
 func GetGameSummary(c *gin.Context) {
 	gameID := c.Param("id")
-	println("gameID", gameID)
 	// Convert gameID to int
 	gameIDInt, err := strconv.Atoi(gameID)
 	if err != nil {
@@ -291,7 +291,7 @@ func ServeChallengePage(c *gin.Context) {
 	htmlContent := string(content)
 
 	// Define the image URL - use a reliable, consistent image
-	imageURL := "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+	imageURL := images.GetTravelImage()
 
 	// Check if we already have OG tags
 	if !strings.Contains(htmlContent, "og:image") {

@@ -171,6 +171,7 @@ func GenerateOptions(correctDest *Destination, allDests []*Destination) []string
 type GameSummary struct {
 	GameID         int    `json:"game_id" db:"game_id"`
 	Username       string `json:"username" db:"username"`
+	ImageURL       string `json:"image_url" db:"image_url"`
 	TotalQuestions int    `json:"total_questions" db:"total_questions"`
 	TotalAnswered  int    `json:"total_answered" db:"total_answered"`
 	TotalCorrect   int    `json:"total_correct" db:"total_correct"`

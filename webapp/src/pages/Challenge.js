@@ -54,15 +54,6 @@ const ColorButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-// Random travel images for preview
-const travelImages = [
-  'https://images.unsplash.com/photo-1530521954074-e64f6810b32d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80',
-  'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80',
-  'https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80',
-  'https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80',
-  'https://images.unsplash.com/photo-1519922639192-e73293ca430e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80'
-];
-
 function Challenge() {
   const { username, gameId } = useParams();
   const [challengerInfo, setChallengerInfo] = useState(null);
@@ -73,9 +64,6 @@ function Challenge() {
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useGame();
-  
-  // Select a random image for the preview
-  const previewImage = travelImages[Math.floor(Math.random() * travelImages.length)];
   
   useEffect(() => {
     const fetchData = async () => {
@@ -93,7 +81,6 @@ function Challenge() {
             setGameSummary(summary);
           } catch (summaryErr) {
             console.error('Failed to fetch game summary:', summaryErr);
-            // Continue even if summary fetch fails
           }
         }
         
@@ -170,7 +157,7 @@ function Challenge() {
     <Container maxWidth="md" sx={{ py: 8 }}>
       {/* Preview image for social media sharing */}
       <Box sx={{ display: 'none' }}>
-        <img src={previewImage} alt="Globetrotter Challenge" />
+        <img src={gameSummary.image_url} alt="Globetrotter Challenge" />
       </Box>
       
       <Fade in={true} timeout={800}>
@@ -193,7 +180,7 @@ function Challenge() {
             <CardMedia
               component="img"
               height="200"
-              image={previewImage}
+              image={gameSummary.image_url}
               alt="Travel destination"
             />
           </Card>

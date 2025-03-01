@@ -31,6 +31,7 @@ This project is organized as a monorepo with two main components:
 - Go 1.16+ (for backend)
 - Node.js 14+ and npm (for frontend)
 - Git
+- (Optional) Pexels API Key
 
 ### Installation
 
@@ -68,33 +69,6 @@ For more detailed instructions, see the README files in the respective directori
 4. Get immediate feedback and learn fun facts
 5. Challenge your friends to beat your score!
 
-## Deployment
-
-### Railway Deployment
-
-The application is deployed on [Railway](https://railway.app), a modern cloud platform that makes it easy to deploy web applications.
-
-#### Deployment Configuration
-
-The deployment uses the following configuration:
-
-- **Backend**: Deployed as a Go service with automatic builds from the repository
-- **Frontend**: Built and served as static files from the same service
-- **Database**: SQLite database stored in a persistent volume
-- **Environment Variables**: Configured in the Railway dashboard for secure credential management
-
-#### Deployment URL
-
-The application is accessible at:
-**[https://globetrotter.up.railway.app](https://globetrotter.up.railway.app)**
-
-#### Deployment Benefits
-
-- **Continuous Deployment**: Automatically deploys when changes are pushed to the main branch
-- **Scalability**: Railway handles scaling based on demand
-- **Monitoring**: Built-in logs and metrics for monitoring application health
-- **SSL**: Automatic SSL certificate management for secure connections
-
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
@@ -103,5 +77,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - Data sources for destination information
 - React and Go communities for excellent documentation
-- Railway for providing an excellent hosting platform
 - All contributors to this project 

@@ -7,6 +7,7 @@ import (
 
 	"github.com/shubhsherl/globetrotter/backend/db"
 	"github.com/shubhsherl/globetrotter/backend/models"
+	"github.com/shubhsherl/globetrotter/backend/services/images"
 )
 
 // GameService handles game-related operations
@@ -202,6 +203,7 @@ func (s *GameService) GetGameSummary(gameID int) (*models.GameSummary, error) {
 	summary := &models.GameSummary{
 		GameID:         game.ID,
 		Username:       user.Username,
+		ImageURL:       images.GetTravelImage(),
 		TotalQuestions: game.TotalQuestions,
 		TotalAnswered:  game.TotalAnswered,
 		TotalCorrect:   game.TotalCorrect,

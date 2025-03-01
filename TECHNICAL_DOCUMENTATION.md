@@ -220,13 +220,3 @@ Potential areas for enhancement include:
 4. **Content Management**: Add admin interface for destination management
 5. **Performance Optimization**: Implement caching and query optimization
 6. **Mobile App**: Develop native mobile applications
-
-## Development Workflow
-
-The project uses Make for common development tasks:
-
-- `make setup`: Set up dependencies
-- `make build`: Build both frontend and backend
-- `make run`: Run the application
-- `make dev`: Run in development mode with hot reloading
-- `make clean`: Clean build artifacts 

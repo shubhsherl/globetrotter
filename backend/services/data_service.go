@@ -11,7 +11,6 @@ import (
 )
 
 var destinations []models.Destination
-var users = make(map[string]models.User)
 
 func init() {
 	rand.Seed(time.Now().UnixNano())
@@ -100,5 +99,3 @@ func (s *DataService) GetDestinationByID(destinationID int) (*models.Destination
 func (s *DataService) GetGameSummary(gameID int) (*models.GameSummary, error) {
 	return s.gameService.GetGameSummary(gameID)
 }
-
-// ... other delegating methods ...
