@@ -1,4 +1,4 @@
-.PHONY: setup build run clean test migrate
+.PHONY: setup build run clean migrate
 
 # Variables
 DB_PATH=./data/globetrotter.db
@@ -32,11 +32,6 @@ clean:
 	@echo "Cleaning..."
 	rm -f ../bin/globetrotter
 	rm -f $(DB_PATH)
-
-# Run tests
-test:
-	@echo "Running tests..."
-	go test ./... -v
 
 # Initialize database only
 init-db:
