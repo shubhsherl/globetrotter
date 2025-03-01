@@ -1,0 +1,36 @@
+The Globetrotter Challenge – The Ultimate Travel Guessing Game!
+You’ll be building Globetrotter, a full-stack web app where users get cryptic clues about a famous place and must guess which destination it refers to. Once they guess, they’ll unlock fun facts, trivia, and surprises about the destination!
+
+🔹 Core Requirements
+1️⃣ Dataset & AI integration
+You'll be provided with a starter dataset (sample.json).
+Use AI tools (e.g., ChatGPT, OpenAI API, Web Scraping, etc.) to expand this dataset to 100+ destinations (in data.json).
+The dataset should include clues, fun facts, and trivia for each destination.
+2️⃣ Functional web app with the following features
+✅ Present 1–2 random clues from the chosen destination.
+✅ Let the user select from multiple possible destination answers.
+✅ Provide immediate funky feedback after answering:
+
+🎉 Correct Answer: Animate confetti + reveal a fun fact.
+😢 Incorrect Answer: Show a sad-face animation + reveal a fun fact.
+✅ Include a ‘Play Again’ or ‘Next’ button to load a different random destination.
+✅ Display total user score, tracking correct and incorrect answers.
+Note: Your dataset must be stored on, and retrieved from the backend! We don’t want users peeping through source code on the browser or having access to all questions and answers 🙈
+
+3️⃣ “Challenge a Friend” feature
+✅ User enters a unique username before inviting friends to play.This registers the user with the system and creates their profile.
+✅ Clicking ‘Challenge a Friend’ button should:
+
+Open a share popup with a dynamic image & invite link for WhatsApp.
+The image could be generated using on-screen UI elements, or any 3rd-party service.
+✅ The invited friend can see the invitee’s score before playing.
+✅ Anyone with the invitation link can play the game with all features.
+📌 What we’re looking for
+🔹 Extensibility: Can your solution scale beyond these requirements?
+🔹 Creativity in UI/UX: Make the game engaging & fun!
+Note: If you are applying for a Backend role, this is NOT a must-have.
+🔹 Effective AI Utilization: Use AI to complement your skills (dataset generation, code suggestions, etc.).
+
+🔹Brownie points: Surprise us with unit test cases, well-written documentation, or anything else that truly reflects the geek within you.
+
+🔹Ownership: Got a question about this assignment? Show ownership by answering it for yourself. There are no right or wrong answers here.

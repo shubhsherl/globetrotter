@@ -151,9 +151,10 @@ func (s *GameService) SubmitAnswer(gameID, questionID, selectedDestinationID int
 
 	// Prepare response
 	response := &models.SubmitAnswerResponse{
-		Correct:        isCorrect,
-		CorrectCity:    correctDest.City,
-		CorrectCountry: correctDest.Country,
+		Correct:         isCorrect,
+		CorrectCity:     correctDest.City,
+		CorrectCountry:  correctDest.Country,
+		CorrectOptionID: question.CorrectDestinationID,
 	}
 
 	// Add fun fact or trivia based on correctness

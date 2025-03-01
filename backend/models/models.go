@@ -73,11 +73,12 @@ type SubmitAnswerRequest struct {
 
 // SubmitAnswerResponse represents the response for submitting an answer
 type SubmitAnswerResponse struct {
-	Correct        bool   `json:"correct" db:"correct"`
-	FunFact        string `json:"fun_fact,omitempty" db:"fun_fact"` // Sent when answer is correct
-	Trivia         string `json:"trivia,omitempty" db:"trivia"`     // Sent when answer is incorrect
-	CorrectCity    string `json:"correct_city" db:"correct_city"`
-	CorrectCountry string `json:"correct_country" db:"correct_country"`
+	Correct         bool   `json:"correct" db:"correct"`
+	FunFact         string `json:"fun_fact,omitempty" db:"fun_fact"` // Sent when answer is correct
+	Trivia          string `json:"trivia,omitempty" db:"trivia"`     // Sent when answer is incorrect
+	CorrectCity     string `json:"correct_city" db:"correct_city"`
+	CorrectCountry  string `json:"correct_country" db:"correct_country"`
+	CorrectOptionID int    `json:"correct_option_id" db:"correct_option_id"`
 }
 
 // GameResult represents the result of a completed game

@@ -1,0 +1,51 @@
+# Git
+.git
+.gitignore
+
+# Node.js / React
+node_modules
+webapp/node_modules
+webapp/build
+webapp/coverage
+webapp/.env*
+webapp/npm-debug.log*
+webapp/yarn-debug.log*
+webapp/yarn-error.log*
+
+# Go / Backend
+backend/bin
+backend/tmp
+backend/data/*.db
+backend/data/*.sqlite*
+backend/vendor
+backend/.env
+
+# IDE and editor files
+.idea
+.vscode
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs
+*.log
+
+# Temporary files
+tmp
+temp
+
+# Build artifacts
+dist
+build
+bin
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Other
+README.md
+challenge.txt
+prompts.txt 
