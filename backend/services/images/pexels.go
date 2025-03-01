@@ -2,7 +2,9 @@ package images
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"net/http"
 	"os"
 )
@@ -67,7 +69,8 @@ func GetTravelImage() string {
 	}
 
 	// Create the request
-	url := "https://api.pexels.com/v1/search?query=travel&per_page=1"
+	randomPage := rand.Intn(5000)
+	url := fmt.Sprintf("https://api.pexels.com/v1/search?query=travel&per_page=1&page=%d", randomPage)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return defaultImage
