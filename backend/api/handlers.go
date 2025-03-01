@@ -2,8 +2,10 @@ package api
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/shubhsherl/globetrotter/backend/db"
@@ -14,17 +16,23 @@ import (
 // Define service objects at the package level
 var (
 	dataService *services.DataService
+	startTime   time.Time
 )
 
 // InitServices initializes the service objects
 func InitServices(database *db.Database) {
 	dataService = services.NewDataService(database)
+	startTime = time.Now()
+	log.Println("API services initialized successfully")
 }
 
 // SetupRoutes configures the API routes
 func SetupRoutes(r *gin.Engine) {
-	// Health check endpoint
+	// Health check endpoint - register at multiple paths for redundancy
 	r.GET("/health", HealthCheck)
+	r.GET("/", HealthCheck)
+
+	log.Println("Health check endpoints registered at /health and /")
 
 	// API routes
 	api := r.Group("/api")
@@ -40,11 +48,21 @@ func SetupRoutes(r *gin.Engine) {
 		api.GET("/game/:id/result", GetGameResult)
 		api.GET("/game/:id/summary", GetGameSummary)
 	}
+
+	log.Println("All API routes registered successfully")
 }
 
 // HealthCheck handles health check requests
 func HealthCheck(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{"status": "ok"})
+	log.Println("Health check endpoint called")
+
+	uptime := time.Since(startTime).String()
+
+	c.JSON(http.StatusOK, gin.H{
+		"status":    "ok",
+		"uptime":    uptime,
+		"timestamp": time.Now().Format(time.RFC3339),
+	})
 }
 
 // GetRandomDestination handles requests for a random destination
