@@ -44,6 +44,7 @@ This project is organized as a monorepo with two main components:
 2. Set up and run the backend:
    ```bash
    cd backend
+   cp .env.example .env # Add your Pexels API Key to the .env file
    go mod download
    go run main.go
    ```

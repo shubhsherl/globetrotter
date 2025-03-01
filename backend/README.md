@@ -6,9 +6,9 @@ This is the backend API for the Globetrotter Challenge game, built with Go (Gola
 
 - RESTful API for game data and user management
 - Random destination selection with multiple-choice options
-- User score tracking
-- Challenge sharing functionality
+- Challenge sharing functionality with social media meta tags
 - SQLite database for persistent storage
+- Integration with Pexels API for destination images
 
 ## Prerequisites
 
@@ -29,12 +29,19 @@ This is the backend API for the Globetrotter Challenge game, built with Go (Gola
    make setup
    ```
 
-3. Build the application:
+3. Configure environment variables:
+   ```bash
+   cp .env.example .env
+   ```
+   
+   Then edit the `.env` file to add your Pexels API key.
+
+4. Build the application:
    ```bash
    make build
    ```
 
-4. Run the server:
+5. Run the server:
    ```bash
    make run
    ```
@@ -45,12 +52,17 @@ This is the backend API for the Globetrotter Challenge game, built with Go (Gola
 
 The application uses SQLite for data storage. The database will be automatically initialized when you run the server for the first time.
 
+To run database migrations:
+```bash
+make migrate
+```
+
 To reinitialize the database:
 ```bash
 make init-db
 ```
 
-The database file is located at `./backend/data/globetrotter.db`.
+The database file is located at `./data/globetrotter.db`.
 
 ## Project Structure
 
@@ -59,17 +71,27 @@ backend/
 ├── api/              # API handlers
 │   └── handlers.go   # Request handlers
 ├── cmd/              # Command-line tools
-│   └── init_db/      # Database initialization tool
+│   ├── init_db/      # Database initialization tool
+│   └── migrate/      # Database migration tool
 ├── data/             # Data files
-│   ├── data.json     # Destination data
 │   └── globetrotter.db # SQLite database
 ├── db/               # Database package
 │   └── db.go         # Database initialization and operations
+├── migrations/       # SQL migration files
+│   ├── 001_initial_schema.sql
+│   ├── 002_add_migrations_table.sql
+│   └── 003_add_indexes.sql
 ├── models/           # Data models
 │   └── models.go     # Struct definitions
 ├── services/         # Business logic
+│   ├── data_service.go      # Data operations
 │   ├── destination_service.go # Destination operations
-│   └── user_service.go        # User operations
+│   ├── game_service.go      # Game operations
+│   ├── user_service.go      # User operations
+│   └── images/             # Image service
+├── .env              # Environment variables
+├── .env.example      # Example environment variables
+├── Makefile          # Build and run commands
 └── main.go           # Entry point
 ```
 
@@ -77,10 +99,17 @@ backend/
 
 | Method | Endpoint                    | Description                           |
 |--------|----------------------------|---------------------------------------|
-| GET    | /api/destinations/random   | Get a random destination with options |
+| GET    | /health                    | Health check endpoint                 |
+| GET    | /api/destinations/random   | Get a random destination              |
 | POST   | /api/users                 | Create a new user                     |
 | GET    | /api/users/:username       | Get user information                  |
-| POST   | /api/users/:username/score | Update a user's score                 |
+| POST   | /api/game/play             | Start a new game                      |
+| GET    | /api/game/:id/next-question| Get the next question in a game       |
+| POST   | /api/game/:id/submit-answer| Submit an answer for a question       |
+| GET    | /api/game/:id/result       | Get the result of a game              |
+| GET    | /api/game/:id/summary      | Get a summary of a completed game     |
+| GET    | /challenge/:username       | Serve challenge page with meta tags   |
+| GET    | /challenge/:username/:gameID | Serve specific game challenge page  |
 
 ## Development
 
@@ -121,7 +150,8 @@ Then run the compiled binary:
 ## Environment Variables
 
 - `PORT`: Server port (default: 8080)
-- `DB_PATH`: Path to SQLite database file (default: "./backend/data/globetrotter.db")
+- `DB_PATH`: Path to SQLite database file (default: "./data/globetrotter.db")
+- `PEXELS_API_KEY`: API key for Pexels image service
 
 ## License
 
