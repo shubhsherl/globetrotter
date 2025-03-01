@@ -573,7 +573,10 @@ function Game() {
             variant="contained" 
             color="primary" 
             sx={{ mt: 3 }}
-            onClick={() => setGameState('initial')}
+            onClick={() => {
+              localStorage.removeItem('username');
+              navigate('/');
+            }}
           >
             Restart Game
           </Button>
