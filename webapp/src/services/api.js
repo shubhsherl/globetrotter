@@ -26,21 +26,15 @@ export const updateUserScore = async (username, correct) => {
   return response.data;
 };
 
+// Modified to only handle local reset without API call
 export const resetUserScore = async (username) => {
-  try {
-    console.log(`Resetting score for user: ${username}`);
-    const response = await axios.post(`${API_URL}/users/${username}/reset-score`);
-    console.log('Reset score response:', response.data);
-    return response.data;
-  } catch (error) {
-    console.error('Error resetting user score:', error);
-    // Even if the API call fails, return a default user object with reset scores
-    return {
-      username,
-      correct_count: 0,
-      total_count: 0
-    };
-  }
+  console.log(`Resetting score locally for user: ${username}`);
+  // Return a default user object with reset scores
+  return {
+    username,
+    correct_count: 0,
+    total_count: 0
+  };
 };
 
 // Track in-flight requests to prevent duplicates

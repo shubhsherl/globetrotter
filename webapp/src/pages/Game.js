@@ -176,22 +176,10 @@ function Game() {
         
         // Reset the score counters in the UI before starting a new game
         if (user && (user.correct_count > 0 || user.total_count > 0)) {
-          try {
-            // Reset score on the server
-            const resetUser = await resetUserScore(user.username);
-            setUser(resetUser);
-            console.log('Reset user score on server (init game):', resetUser);
-          } catch (err) {
-            console.error('Failed to reset user score on server:', err);
-            // Fallback to local reset if server reset fails
-            const resetUser = {
-              ...user,
-              correct_count: 0,
-              total_count: 0
-            };
-            setUser(resetUser);
-            console.log('Fallback: Resetting user score locally (init game):', resetUser);
-          }
+          // Reset score locally
+          const resetUser = await resetUserScore(user.username);
+          setUser(resetUser);
+          console.log('Reset user score locally (init game):', resetUser);
         }
         
         // Reset score in context
@@ -243,22 +231,10 @@ function Game() {
         
         // Use an async function inside useEffect
         const resetUserScoreAsync = async () => {
-          try {
-            // Reset score on the server
-            const resetUser = await resetUserScore(user.username);
-            setUser(resetUser);
-            console.log('Reset user score on server (state change):', resetUser);
-          } catch (err) {
-            console.error('Failed to reset user score on server:', err);
-            // Fallback to local reset if server reset fails
-            const resetUser = {
-              ...user,
-              correct_count: 0,
-              total_count: 0
-            };
-            setUser(resetUser);
-            console.log('Fallback: Resetting user score locally (state change):', resetUser);
-          }
+          // Reset score locally
+          const resetUser = await resetUserScore(user.username);
+          setUser(resetUser);
+          console.log('Reset user score locally (state change):', resetUser);
         };
         
         resetUserScoreAsync();
@@ -330,22 +306,10 @@ function Game() {
     
     // Reset the user's score when starting a new game
     if (user) {
-      try {
-        // Reset score on the server
-        const resetUser = await resetUserScore(user.username);
-        setUser(resetUser);
-        console.log('Reset user score on server:', resetUser);
-      } catch (err) {
-        console.error('Failed to reset user score on server:', err);
-        // Fallback to local reset if server reset fails
-        const resetUser = {
-          ...user,
-          correct_count: 0,
-          total_count: 0
-        };
-        setUser(resetUser);
-        console.log('Fallback: Resetting user score locally:', resetUser);
-      }
+      // Reset score locally
+      const resetUser = await resetUserScore(user.username);
+      setUser(resetUser);
+      console.log('Reset user score locally:', resetUser);
     }
     
     // Reset score in context

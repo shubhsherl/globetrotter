@@ -15,6 +15,7 @@ setup:
 	go get -u github.com/gin-gonic/gin
 	go get -u github.com/gin-contrib/cors
 	go get -u github.com/mattn/go-sqlite3
+	go get -u github.com/stretchr/testify/assert
 
 # Build the application
 build: $(GO_FILES)
@@ -35,7 +36,7 @@ clean:
 # Run tests
 test:
 	@echo "Running tests..."
-	go test ./...
+	go test ./... -v
 
 # Initialize database only
 init-db:

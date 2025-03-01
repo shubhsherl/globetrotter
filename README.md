@@ -53,6 +53,25 @@ For more detailed instructions, see the README files in the respective directori
 - [Backend README](./backend/README.md)
 - [Frontend README](./webapp/README.md)
 
+## Running Tests
+
+### Backend Tests
+
+Run all backend tests:
+```bash
+make backend-test
+```
+
+For more detailed testing options, see the [Backend Tests README](./backend/tests/README.md).
+
+### Frontend Tests
+
+Run all frontend tests:
+```bash
+cd webapp
+npm test
+```
+
 ## How to Play
 
 1. Enter your username to start the game
