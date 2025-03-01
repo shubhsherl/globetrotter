@@ -15,8 +15,11 @@ COPY webapp/ ./
 RUN npm run build
 
 # Stage 2: Build the Go backend
-FROM golang:1.21-alpine AS backend-builder
+FROM golang:1.24-alpine AS backend-builder
 WORKDIR /app
+
+# Install SQLite dependencies for the build
+RUN apk add --no-cache gcc musl-dev sqlite-dev
 
 # Copy go.mod and go.sum
 COPY backend/go.mod ./
@@ -26,16 +29,16 @@ COPY backend/go.sum ./
 RUN go mod download
 
 # Copy the backend source code
-COPY backend/ ./backend/
+COPY backend/ ./
 
 # Build the backend
-RUN cd backend && CGO_ENABLED=1 GOOS=linux go build -o /app/bin/globetrotter
+RUN CGO_ENABLED=1 GOOS=linux go build -o /app/bin/globetrotter github.com/shubhsherl/globetrotter/backend
 
 # Stage 3: Final image
 FROM alpine:3.18
 
 # Install necessary packages
-RUN apk add --no-cache ca-certificates tzdata sqlite gcc musl-dev
+RUN apk add --no-cache ca-certificates tzdata sqlite
 
 # Set working directory
 WORKDIR /app
