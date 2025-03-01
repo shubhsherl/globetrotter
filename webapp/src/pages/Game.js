@@ -574,7 +574,9 @@ function Game() {
             color="primary" 
             sx={{ mt: 3 }}
             onClick={() => {
-              localStorage.removeItem('username');
+              // Clear the user data from localStorage
+              localStorage.removeItem('globetrotter_user');
+              localStorage.removeItem('globetrotter_timestamp');
               navigate('/');
             }}
           >
