@@ -48,6 +48,7 @@ func main() {
 
 	// Setup routes
 	api.SetupRoutes(r)
+	log.Println("API routes configured")
 
 	// Check if we're running in Docker
 	webappPath := "../webapp/build"
@@ -60,6 +61,11 @@ func main() {
 	r.Static("/static", filepath.Join(webappPath, "static"))
 	r.StaticFile("/favicon.ico", filepath.Join(webappPath, "favicon.ico"))
 	r.StaticFile("/", filepath.Join(webappPath, "index.html"))
+
+	// Special route for challenge pages with proper meta tags for social sharing
+	r.GET("/challenge/:username", api.ServeChallengePage)
+	r.GET("/challenge/:username/:gameID", api.ServeChallengePage)
+	log.Println("Challenge routes configured for social sharing")
 
 	// NoRoute should come after explicit static file handlers
 	r.NoRoute(func(c *gin.Context) {

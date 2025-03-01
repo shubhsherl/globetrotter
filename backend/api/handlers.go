@@ -2,9 +2,13 @@ package api
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
+	"path/filepath"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -258,4 +262,70 @@ func GetGameSummary(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, summary)
+}
+
+// ServeChallengePage serves the challenge page with proper Open Graph meta tags
+func ServeChallengePage(c *gin.Context) {
+	username := c.Param("username")
+	gameID := c.Param("gameID")
+
+	log.Printf("Serving challenge page for username: %s, gameID: %s", username, gameID)
+
+	// Get the path to index.html
+	webappPath := "../webapp/build"
+	if _, err := os.Stat("/app/webapp/build"); err == nil {
+		webappPath = "/app/webapp/build"
+	}
+
+	indexPath := filepath.Join(webappPath, "index.html")
+
+	// Read the index.html file
+	content, err := ioutil.ReadFile(indexPath)
+	if err != nil {
+		log.Printf("Error reading index.html: %v", err)
+		c.File(indexPath) // Fallback to regular file serving
+		return
+	}
+
+	// Convert to string for easier manipulation
+	htmlContent := string(content)
+
+	// Define the image URL - use a reliable, consistent image
+	imageURL := "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+
+	// Check if we already have OG tags
+	if !strings.Contains(htmlContent, "og:image") {
+		// Insert Open Graph meta tags before the closing head tag
+		metaTags := fmt.Sprintf(`
+    <meta property="og:title" content="Globetrotter Challenge" />
+    <meta property="og:description" content="%s has challenged you to beat their score in Globetrotter!" />
+    <meta property="og:image" content="%s" />
+    <meta property="og:url" content="%s" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Globetrotter" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>`, username, imageURL, c.Request.URL.String())
+
+		// Replace the closing head tag with our meta tags
+		htmlContent = strings.Replace(htmlContent, "</head>", metaTags, 1)
+	} else {
+		// Update existing OG tags
+		htmlContent = strings.Replace(htmlContent, `content="Globetrotter - The Ultimate Travel Guessing Game"`,
+			fmt.Sprintf(`content="%s has challenged you to beat their score in Globetrotter!"`, username), 1)
+
+		// If there's an existing og:image tag, update it
+		if strings.Contains(htmlContent, `property="og:image"`) {
+			startIdx := strings.Index(htmlContent, `property="og:image"`)
+			endIdx := strings.Index(htmlContent[startIdx:], "/>") + startIdx
+			if endIdx > startIdx {
+				beforeTag := htmlContent[:startIdx]
+				afterTag := htmlContent[endIdx+2:]
+				htmlContent = beforeTag + fmt.Sprintf(`property="og:image" content="%s" />`, imageURL) + afterTag
+			}
+		}
+	}
+
+	// Serve the modified HTML content
+	c.Header("Content-Type", "text/html")
+	c.String(http.StatusOK, htmlContent)
 }

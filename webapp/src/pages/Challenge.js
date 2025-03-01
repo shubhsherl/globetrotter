@@ -127,59 +127,7 @@ function Challenge() {
     }
   };
   
-  // Meta tags for social media preview
-  useEffect(() => {
-    // Set meta tags for social media preview
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = `${username} has challenged you to beat their score in the Globetrotter Challenge!`;
-      document.head.appendChild(meta);
-    } else {
-      metaDescription.content = `${username} has challenged you to beat their score in the Globetrotter Challenge!`;
-    }
-    
-    // Open Graph meta tags for social media
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    const ogDescription = document.querySelector('meta[property="og:description"]');
-    const ogImage = document.querySelector('meta[property="og:image"]');
-    
-    if (!ogTitle) {
-      const meta = document.createElement('meta');
-      meta.property = 'og:title';
-      meta.content = 'Globetrotter Challenge';
-      document.head.appendChild(meta);
-    } else {
-      ogTitle.content = 'Globetrotter Challenge';
-    }
-    
-    if (!ogDescription) {
-      const meta = document.createElement('meta');
-      meta.property = 'og:description';
-      meta.content = `${username} has challenged you to beat their score in the Globetrotter Challenge!`;
-      document.head.appendChild(meta);
-    } else {
-      ogDescription.content = `${username} has challenged you to beat their score in the Globetrotter Challenge!`;
-    }
-    
-    if (!ogImage) {
-      const meta = document.createElement('meta');
-      meta.property = 'og:image';
-      meta.content = previewImage;
-      document.head.appendChild(meta);
-    } else {
-      ogImage.content = previewImage;
-    }
-    
-    return () => {
-      // Clean up meta tags when component unmounts
-      if (metaDescription) metaDescription.content = 'Globetrotter - Test your geography knowledge';
-      if (ogTitle) ogTitle.content = 'Globetrotter Challenge';
-      if (ogDescription) ogDescription.content = 'Test your geography knowledge with Globetrotter';
-      if (ogImage) ogImage.content = '';
-    };
-  }, [username, previewImage]);
+  // Note: Meta tags are now handled server-side for better social media sharing
   
   if (loading) {
     return (
@@ -199,17 +147,18 @@ function Challenge() {
           <StyledPaper>
             <ErrorIcon color="error" sx={{ fontSize: 80, mb: 2 }} />
             <Typography variant="h4" gutterBottom>
-              Error
+              Challenge Not Found
             </Typography>
-            <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
+            <Typography variant="body1" paragraph align="center">
               {error}
             </Typography>
             <Button 
               variant="contained" 
-              color="primary"
+              color="primary" 
               onClick={() => navigate('/')}
+              sx={{ mt: 2 }}
             >
-              Go to Home
+              Go Home
             </Button>
           </StyledPaper>
         </Fade>
