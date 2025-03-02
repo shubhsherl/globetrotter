@@ -2,6 +2,10 @@
 
 The Globetrotter Challenge is an interactive travel guessing game where players are presented with cryptic clues about famous destinations and must guess the correct location. Upon guessing correctly, players unlock fun facts and trivia about the destination!
 
+> This application was generated with Claude 3.7 Sonnet and Cursor editor.
+
+Challenge link: https://app6.greenhouse.io/application_form/dbfb1f8f247e93f7cd5548a4d408d0ce
+
 ## Live Demo
 
 The application is deployed and available at:
