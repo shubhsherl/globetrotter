@@ -109,7 +109,7 @@ function Challenge() {
       setUser(user);
       navigate('/game');
     } catch (err) {
-      setError('Failed to create user. Please try again.');
+      setError(`Failed to create user. Please try again. ${err.message}`);
       setSubmitting(false);
     }
   };

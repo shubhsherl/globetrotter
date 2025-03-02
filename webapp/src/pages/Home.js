@@ -86,7 +86,7 @@ function Home() {
       setLoading(false);
       setShowWelcome(true);
     } catch (err) {
-      setError('Failed to create user. Please try again.');
+      setError(`Failed to create user. Please try again. ${err.message}`);
       setLoading(false);
     }
   };

@@ -73,9 +73,3 @@ For more detailed instructions, see the README files in the respective directori
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- Data sources for destination information
-- React and Go communities for excellent documentation
-- All contributors to this project 
